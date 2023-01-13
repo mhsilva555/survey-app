@@ -5,7 +5,6 @@ const minifyCss = require('gulp-clean-css')
 const sourcesMaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
-const browserSync = require('browser-sync').create();
 
 sassCompiler.compiler = require('node-sass');
 
@@ -20,7 +19,6 @@ gulp.task('bundleSass', () => {
         .pipe(sourcesMaps.write())
         .pipe(concat('styles.min.css'))
         .pipe(dest('./resources/build/css/'))
-        .pipe(browserSync.stream())
 });
 
 gulp.task('bundleSassFrontend', () => {
@@ -33,7 +31,6 @@ gulp.task('bundleSassFrontend', () => {
         .pipe(sourcesMaps.write())
         .pipe(concat('front.min.css'))
         .pipe(dest('./resources/build/css/'))
-        .pipe(browserSync.stream())
 });
 
 gulp.task('bundleJs', () => {
@@ -43,7 +40,6 @@ gulp.task('bundleJs', () => {
         .pipe(uglify())
         .pipe(concat('app.min.js'))
         .pipe(gulp.dest('./resources/build/js/'))
-        .pipe(browserSync.stream())
 });
 
 gulp.task('bundleJsFrontend', () => {
@@ -53,22 +49,9 @@ gulp.task('bundleJsFrontend', () => {
         .pipe(uglify())
         .pipe(concat('front.min.js'))
         .pipe(gulp.dest('./resources/build/js/'))
-        .pipe(browserSync.stream())
 });
 
 gulp.task('dev', function() {
-
-    browserSync.init({
-        host: 'localhost',
-        port: 3000,
-        files: [
-            './views/**/*.php',
-            './assets/sass/**/*.scss',
-            './assets/js/**/*.js'
-        ],
-        proxy: "http://enquetes.local/wp-admin/admin.php?page=survey-managment"
-    });
-
     watch('./resources/scss/**/*.scss', gulp.series('bundleSass'));
     watch('./resources/scss/front/**/*.scss', gulp.series('bundleSassFrontend'));
     watch('./resources/css/**/*.css', gulp.series('bundleSass'));
