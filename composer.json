@@ -15,7 +15,6 @@
         }
     ],
     "require": {
-        "fiskhandlarn/blade": "^0.6.2",
-        "nesbot/carbon": "^2.64"
+        "fiskhandlarn/blade": "^0.6.2"
     }
 }
