@@ -1,0 +1,21 @@
+{
+    "name": "survey/app",
+    "description": "Criação de Enquetes Online com Gestão de Resultados.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Survey\\App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marcos Henrique",
+            "email": "mhsilva555@gmail.com"
+        }
+    ],
+    "require": {
+        "fiskhandlarn/blade": "^0.6.2",
+        "nesbot/carbon": "^2.64"
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "themosis-theme",
+  "version": "2.0.0",
+  "description": "Themosis framework boilerplate theme.",
+  "scripts": {},
+  "author": "Themosis",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/themosis/theme/issues"
+  },
+  "homepage": "https://github.com/themosis/theme#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "del": "^2.2.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify": "^0.0.10",
+    "gulp-rev": "^7.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "node-css": "^0.1.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.49.7"
+  }
+}

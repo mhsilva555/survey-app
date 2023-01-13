@@ -1,0 +1,110 @@
+@import "mixins";
+@import "boot";
+
+.card {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 none !important;
+}
+body {
+  background: #EEEEEE !important;
+  min-height: 100vh !important;
+  height: auto !important;
+}
+input {
+  border-color: #cccccc !important;
+}
+.table {
+  width: 100%;
+  .shortcode-table {
+    span {
+      background: #3e8ed0;
+      color: #ffffff;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      cursor: pointer;
+      @include border-radius(4px);
+    }
+  }
+}
+
+.delete-survey {
+  cursor: pointer;
+}
+
+.empty-surveys {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.answer {
+  margin: 0px 0 !important;
+  padding: 20px 20px !important;
+  border: 1px solid rgba(0,0,0,0.2);
+  position: relative;
+  img {
+    max-width: 60px;
+    height: auto;
+  }
+  .button {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    margin: 20px 0 0 0;
+    font-size: 0.65rem !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .count-votes {
+    margin: 15px 0 0 0;
+    display: flex;
+    border: 1px solid #cccccc;
+    overflow: hidden;
+    @include border-radius(4px);
+    span {
+      width: 100px;
+      background: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #cccccc;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    input {
+      border: 0;
+    }
+  }
+}
+.new-answer {
+  margin: 20px 0 0 0 !important;
+}
+.form-new-survey {
+  input[type="text"] {
+    font-weight: 600 !important;
+  }
+}
+
+fieldset.file {
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+img.preview {
+  max-width: 50px;
+  height: auto;
+  border: 0 none !important;
+  outline: none !important;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #151515;
+  margin: 0 0 10px 0;
+  display: block;
+}
+.section-form {
+  padding: 10px 0;
+}
