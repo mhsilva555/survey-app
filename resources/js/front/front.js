@@ -29,6 +29,7 @@
         let email = $('#email');
         let cpf = $('#cpf');
         let answer_id = $('.answer.selected input[name="answer_id"]');
+        let count_answer = $('.answer.selected .count');
         let survey_id = $('#survey_id');
 
         $('.field').each((index, value) => {
@@ -78,6 +79,7 @@
                     cpf.val('');
                     $('.answer').removeClass('selected');
                     total_votes.children('strong').text(response)
+                    count_answer.text( parseInt(count_answer.text()) + 1 )
             }
 
         });
