@@ -2,7 +2,10 @@
 
 namespace Survey\App\Votes;
 
-use Bissolli\ValidadorCpfCnpj\CPF;
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
+use Egulias\EmailValidator\Validation\RFCValidation;
 
 class ValidateVote
 {
@@ -11,9 +14,9 @@ class ValidateVote
         global $wpdb;
         $table = $wpdb->prefix.VOTES;
 
-        $check = $wpdb->get_row("SELECT * FROM {$table} WHERE vote_cpf = '{$cpf}' AND vote_survey_id = '{$survey_id}'", OBJECT);
+        $result = $wpdb->get_row("SELECT * FROM {$table} WHERE vote_cpf = '{$cpf}' AND vote_survey_id = '{$survey_id}'", OBJECT);
 
-        if ($check) {
+        if ($result) {
             wp_send_json(403);
         }
     }
@@ -38,6 +41,45 @@ class ValidateVote
             if ($cpf[$c] != $d) {
                 wp_send_json(401);
             }
+        }
+    }
+
+    public static function emailIsValid($email)
+    {
+        $validator = new EmailValidator();
+        $multipleValidations = new MultipleValidationWithAnd([
+            new RFCValidation(),
+            new DNSCheckValidation()
+        ]);
+        $response = $validator->isValid($email, $multipleValidations);
+
+        if (!$response) {
+            wp_send_json(401);
+        }
+    }
+
+    public static function emailExists($email, $survey_id)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.VOTES;
+
+        $result = $wpdb->get_row("SELECT vote_email FROM {$table} WHERE vote_email = '{$email}' AND vote_survey_id = '{$survey_id}'", OBJECT);
+
+        if ($result) {
+            wp_send_json(403);
+        }
+    }
+
+    public static function checkVoteRegister($survey_id)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.VOTES;
+        $ip = $_SERVER['REMOTE_ADDR'];
+
+        $result = $wpdb->get_row("SELECT vote_ip FROM {$table} WHERE vote_ip = '{$ip}' AND vote_survey_id = '{$survey_id}'", OBJECT);
+
+        if ($result) {
+            wp_send_json(403);
         }
     }
 }

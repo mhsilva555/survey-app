@@ -53,11 +53,15 @@
 
                     <p style="margin: 15px 0;font-size: 1.3rem"><b>Selecione seu voto:</b></p>
 
+                    @php $total_votes = []; @endphp
+
                     <div class="answer-list">
                         @foreach($data as $answer)
+                            @php $total_votes[] = $answer->answer_totalvotes ?? 0; @endphp
+
                             <div class="answer answer-context">
                                 <span class="answer-text answer-context" data-id="{{ $answer->answer_id }}">{{ $answer->answer_text }}</span>
-                                <p><b>Votos: </b><span class="count">{{ $answer->answer_totalvotes }}</span></p>
+                                <p><b>Votos: </b><span class="count">{{ $answer->answer_totalvotes ?? 0 }}</span></p>
 
                                 <div class="answer-thumb">
                                     <div class="answer-image answer-context" style="background: url('{{ $answer->answer_image }}')"></div>
@@ -73,8 +77,9 @@
                 </form>
 
                 <div class="total-votes">
-                    <p data-total="{{ $data[0]->survey_totalvotes ?? 0 }}">Total de votos: <strong>{{ $data[0]->survey_totalvotes ?? 0 }}</strong></p>
+                    <p data-total="{{ array_sum($total_votes) }}">Total de votos: <strong>{{ array_sum($total_votes) }}</strong></p>
                 </div>
+
             </div>
 
             @endif

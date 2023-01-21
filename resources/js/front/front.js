@@ -59,6 +59,7 @@
                 });
             }
         }).done((response) => {
+            console.log(response)
             switch (response) {
                 case 500:
                     Swal.fire('Erro ao salvar seu voto!', 'Por favor, tente novamente dentro de alguns instantes', 'error');
@@ -70,7 +71,7 @@
                     Swal.fire('Você já votou nessa enquete!', '', 'warning');
                     break;
                 case 401:
-                    Swal.fire('CPF Inválido!', '', 'warning');
+                    Swal.fire('Dados Inválidos!', '', 'warning');
                     break;
                 default:
                     Swal.fire('Voto Realizado com Sucesso!', '', 'success');

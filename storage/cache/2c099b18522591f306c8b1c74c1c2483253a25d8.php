@@ -53,11 +53,15 @@
 
                     <p style="margin: 15px 0;font-size: 1.3rem"><b>Selecione seu voto:</b></p>
 
+                    <?php $total_votes = []; ?>
+
                     <div class="answer-list">
                         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $answer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $total_votes[] = $answer->answer_totalvotes ?? 0; ?>
+
                             <div class="answer answer-context">
                                 <span class="answer-text answer-context" data-id="<?php echo e($answer->answer_id); ?>"><?php echo e($answer->answer_text); ?></span>
-                                <p><b>Votos: </b><span class="count"><?php echo e($answer->answer_totalvotes); ?></span></p>
+                                <p><b>Votos: </b><span class="count"><?php echo e($answer->answer_totalvotes ?? 0); ?></span></p>
 
                                 <div class="answer-thumb">
                                     <div class="answer-image answer-context" style="background: url('<?php echo e($answer->answer_image); ?>')"></div>
@@ -73,8 +77,9 @@
                 </form>
 
                 <div class="total-votes">
-                    <p data-total="<?php echo e($data[0]->survey_totalvotes ?? 0); ?>">Total de votos: <strong><?php echo e($data[0]->survey_totalvotes ?? 0); ?></strong></p>
+                    <p data-total="<?php echo e(array_sum($total_votes)); ?>">Total de votos: <strong><?php echo e(array_sum($total_votes)); ?></strong></p>
                 </div>
+
             </div>
 
             <?php endif; ?>

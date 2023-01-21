@@ -15,6 +15,7 @@
         }
     ],
     "require": {
-        "fiskhandlarn/blade": "^0.6.2"
+        "fiskhandlarn/blade": "^0.6.2",
+        "egulias/email-validator": "^4.0"
     }
 }
