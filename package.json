@@ -9,7 +9,7 @@
     "url": "https://github.com/themosis/theme/issues"
   },
   "homepage": "https://github.com/themosis/theme#readme",
-  "devDependencies": {
+  "dependencies": {
     "browser-sync": "^2.27.7",
     "del": "^2.2.0",
     "gulp": "^4.0.2",
