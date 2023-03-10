@@ -22,7 +22,7 @@ class NewVote
             wp_send_json(400);
         }
 
-        ValidateVote::checkVoteRegister($survey_id);
+        //ValidateVote::checkVoteRegister($survey_id);
         ValidateVote::emailIsValid($email);
         ValidateVote::emailExists($email, $survey_id);
         ValidateVote::cpfIsValid($cpf);
