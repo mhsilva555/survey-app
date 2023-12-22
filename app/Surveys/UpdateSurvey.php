@@ -34,7 +34,7 @@ class UpdateSurvey
 
         if (!$votes->survey_totalvotes) {
             $wpdb->update($table, ['survey_totalvotes' => 1], ['survey_id' => $survey_id]);
-            return;
+            return $votes->survey_totalvotes + 1;
         }
 
         $wpdb->query("UPDATE {$table} SET survey_totalvotes = survey_totalvotes + 1 WHERE survey_id = {$survey_id}");

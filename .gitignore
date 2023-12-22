@@ -7,3 +7,4 @@ yarn.lock
 *.txt
 .env
 .sass-cache
+storage/cache

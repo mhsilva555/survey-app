@@ -1,5 +1,6 @@
 <?php
 
+use Survey\App\Facades\Options;
 use Survey\App\Surveys\SaveSurvey;
 use Survey\App\Surveys\UpdateSurvey;
 
@@ -31,6 +32,24 @@ function save_survey()
     wp_send_json($survey_id);
 }
 add_action('wp_ajax_save_survey', 'save_survey');
+
+function config_survey()
+{
+    $nonce = wp_verify_nonce($_REQUEST['nonce']);
+
+    if (!$nonce) {
+       wp_send_json(400);
+    }
+
+    $recaptcha_site_key = $_REQUEST['recaptcha_site_key'] ?? null;
+    $recaptcha_secret_key = $_REQUEST['recaptcha_secret_key'] ?? null;
+
+    Options::update('recaptcha_site_key', $recaptcha_site_key);
+    Options::update('recaptcha_secret_key', $recaptcha_secret_key);
+
+    wp_send_json(200);
+}
+add_action('wp_ajax_config_survey', 'config_survey');
 
 
 function delete_survey()

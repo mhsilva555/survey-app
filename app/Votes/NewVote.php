@@ -17,12 +17,18 @@ class NewVote
         $cpf = sanitize_text_field($_REQUEST['cpf']);
         $answer_id = sanitize_text_field($_REQUEST['answer_id']);
         $survey_id = sanitize_text_field($_REQUEST['survey_id']);
+        $token_recaptcha = sanitize_text_field($_REQUEST['token_recaptcha'] ?? null);
 
         if ($cpf == '' || $nome == '' || $nome == '') {
             wp_send_json(400);
         }
 
+        if (!$token_recaptcha || $token_recaptcha === '') {
+            wp_send_json(402);
+        }
+
         //ValidateVote::checkVoteRegister($survey_id);
+        ValidateVote::validateRecaptcha($token_recaptcha);
         ValidateVote::emailIsValid($email);
         ValidateVote::emailExists($email, $survey_id);
         ValidateVote::cpfIsValid($cpf);

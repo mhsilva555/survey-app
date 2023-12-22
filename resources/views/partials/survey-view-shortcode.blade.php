@@ -72,7 +72,7 @@
                         @endforeach
                     </div>
 
-                    <button type="submit" class="survey-button-submit disabled" disabled>Votar</button>
+                    <button type="submit" class="g-recaptcha survey-button-submit disabled" disabled>Votar</button>
                     <input type="hidden" name="survey_id" id="survey_id" value="{{ $data[0]->survey_id }}">
                 </form>
 

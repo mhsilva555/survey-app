@@ -1,5 +1,4 @@
 (function($) {
-
     $(document).ready(function () {
         $('#repeater-answer').repeater({
             repeaters: [{
@@ -214,6 +213,41 @@
 
             Swal.fire('Enquete Salva com Sucesso', '', 'success');
             document.location.href = obj.adminurl + 'admin.php?page=survey-managment&edit_survey='+response;
+        });
+    });
+
+    $(document).on('submit', '#form-config-survey', function(e) {
+        e.preventDefault();
+
+        let data = new FormData($(this)[0]);
+        data.append("action", "config_survey");
+        data.append("nonce", obj.ajax_nonce);
+
+        $.ajax({
+            url: obj.ajaxurl,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: data,
+            beforeSend: () => {
+                Swal.fire({
+                    title: 'Salvando as Configurações',
+                    icon: 'info',
+                    didOpen: () => { Swal.showLoading() }
+                });
+            }
+        }).done((response) => {
+            console.log(response)
+            Swal.close()
+            if (response === 400) {
+                Swal.fire('Ops! Algo de errado.', 'As Configurações não foram salvas. Tente novamente.', 'error');
+                return false;
+            }
+
+            Swal.fire('Configurações Salvas com Sucesso', '', 'success');
+            setTimeout(() => {
+                document.location.href = obj.adminurl + 'admin.php?page=config-survey';
+            }, 1000)
         });
     });
 })(jQuery);

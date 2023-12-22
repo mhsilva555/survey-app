@@ -34,7 +34,7 @@
     @if(isset($edit_survey))
         <div class="count-votes">
             <span>Votos</span>
-            <input type="text" class="input" name="total_votes_answer" value="{{ $answer->answer_totalvotes ?? 0 }}">
+            <input type="number" class="input" name="total_votes_answer" value="{{ $answer->answer_totalvotes ?? 0 }}">
         </div>
     @endif
 </div>

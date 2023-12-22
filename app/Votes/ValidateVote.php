@@ -6,6 +6,7 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
+use Survey\App\Facades\Options;
 
 class ValidateVote
 {
@@ -80,6 +81,37 @@ class ValidateVote
 
         if ($result) {
             wp_send_json(403);
+        }
+    }
+
+    public static function validateRecaptcha($token):void
+    {
+        $recaptcha_secret = Options::get('recaptcha_secret_key');
+
+        if (!$recaptcha_secret) {
+            wp_send_json(402);
+        }
+  
+        $recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+        $recaptcha_data = array(
+            'secret' => $recaptcha_secret,
+            'response' => $token,
+            'remoteip' => $_SERVER['REMOTE_ADDR'],
+        );
+
+        $recaptcha_options = array(
+            'http' => array(
+                'method' => 'POST',
+                'content' => http_build_query($recaptcha_data),
+            ),
+        );
+
+        $recaptcha_context = stream_context_create($recaptcha_options);
+        $recaptcha_result = file_get_contents($recaptcha_url, false, $recaptcha_context);
+        $recaptcha_result_data = json_decode($recaptcha_result, true);
+
+        if (!$recaptcha_result_data['success']) {
+            wp_send_json(402);
         }
     }
 }

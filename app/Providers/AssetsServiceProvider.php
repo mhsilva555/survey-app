@@ -2,6 +2,7 @@
 
 namespace Survey\App\Providers;
 
+use Survey\App\Facades\Options;
 use Survey\App\PageOptions\DefaultSurveyPage;
 
 class AssetsServiceProvider
@@ -9,12 +10,14 @@ class AssetsServiceProvider
     private $permissions = [
         "toplevel_page_".DEFAULT_SURVEY_SLUG,
         "enquetes_page_".NEW_SURVEY_SLUG,
+        "enquetes_page_".CONFIG_SURVEY_SLUG,
     ];
 
     public function __construct()
     {
         add_action('admin_enqueue_scripts', [$this, 'styles']);
         add_action('admin_enqueue_scripts', [$this, 'scripts']);
+        add_filter('script_loader_tag', [$this, 'asyncDefer'], 10, 2);
         add_action('wp_enqueue_scripts', [$this, 'scriptsFront']);
     }
 
@@ -26,13 +29,26 @@ class AssetsServiceProvider
         endif;
     }
 
+    function asyncDefer($tag, $handle) {
+        $scripts_async_defer = array('recaptcha');
+    
+        if (in_array($handle, $scripts_async_defer)) {
+            $tag = str_replace(' src=', ' async defer src=', $tag);
+        }
+    
+        return $tag;
+    }
+
     public function scriptsFront()
     {
         wp_enqueue_style('front-css', SURVEY_PLUGIN_URI . '/resources/build/css/front.min.css', [], false);
+        
         wp_enqueue_script('front-js', SURVEY_PLUGIN_URI . '/resources/build/js/front.min.js', ['jquery'], false, true);
+        wp_enqueue_script('recaptcha', 'https://www.google.com/recaptcha/api.js?render=6Le5-TkpAAAAAAx73bry-XgxBmd6qa_ifCAcOKQy', [], null, true);
 
         wp_localize_script('front-js', 'wp', [
-            'ajaxurl' => admin_url('admin-ajax.php')
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'recaptcha_site_key' => Options::get('recaptcha_site_key'),
         ]);
     }
 

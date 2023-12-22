@@ -14,7 +14,7 @@ class SurveysDatabase extends AbstractDatabases
             "survey_question VARCHAR(255) NOT NULL",
             "survey_active INT(1) NOT NULL",
             "survey_timestamp VARCHAR(255) NOT NULL",
-            "survey_totalvotes INT",
+            "survey_totalvotes INT DEFAULT 0",
             "survey_image VARCHAR(255)",
             "PRIMARY KEY (survey_id)"
         ]);
