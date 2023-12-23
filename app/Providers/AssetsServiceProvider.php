@@ -44,7 +44,10 @@ class AssetsServiceProvider
         wp_enqueue_style('front-css', SURVEY_PLUGIN_URI . '/resources/build/css/front.min.css', [], false);
         
         wp_enqueue_script('front-js', SURVEY_PLUGIN_URI . '/resources/build/js/front.min.js', ['jquery'], false, true);
-        wp_enqueue_script('recaptcha', 'https://www.google.com/recaptcha/api.js?render=6Le5-TkpAAAAAAx73bry-XgxBmd6qa_ifCAcOKQy', [], null, true);
+
+        if ($site_key = Options::get('recaptcha_site_key')):
+            wp_enqueue_script('recaptcha', 'https://www.google.com/recaptcha/api.js?render='.$site_key, [], null, true);
+        endif;
 
         wp_localize_script('front-js', 'wp', [
             'ajaxurl' => admin_url('admin-ajax.php'),
