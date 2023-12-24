@@ -88,9 +88,13 @@
             url: obj.ajaxurl,
             type: 'POST',
             data: {
-                id: $(this).data('survey'),
+                survey_id: $(this).data('survey'),
                 action: 'remove_image'
-            }
+            }.done((response) => {
+                if (response === 200) {
+                    Swal.fire('Imagem Removida com Sucesso!', '', 'success');
+                }
+            })
         })
     });
 
