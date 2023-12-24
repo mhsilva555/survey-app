@@ -89,9 +89,11 @@
             type: 'POST',
             data: {
                 survey_id: $(this).data('survey'),
+                nonce: obj.ajax_nonce,
                 action: 'remove_image'
             }
         }).done((response) => {
+            console.log(response)
             if (response === 200) {
                 Swal.fire('Imagem Removida com Sucesso!', '', 'success');
             }

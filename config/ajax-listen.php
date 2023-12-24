@@ -35,8 +35,9 @@ add_action('wp_ajax_save_survey', 'save_survey');
 
 function remove_image() {
     $survey_id = $_REQUEST['survey_id'] ?? null;
+    $nonce = wp_verify_nonce($_REQUEST['nonce']);
 
-    if (!$survey_id) {
+    if (!$nonce || !$survey_id) {
         wp_send_json(400);
     }
 
