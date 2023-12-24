@@ -38,16 +38,20 @@ function config_survey()
     $nonce = wp_verify_nonce($_REQUEST['nonce']);
 
     if (!$nonce) {
-       wp_send_json(400);
+       wp_send_json(400, 400);
     }
 
-    $recaptcha_site_key = $_REQUEST['recaptcha_site_key'] ?? null;
-    $recaptcha_secret_key = $_REQUEST['recaptcha_secret_key'] ?? null;
+    if (empty($_REQUEST['fields'])) {
+        wp_send_json(400, 400);
+    }
+
+    $recaptcha_site_key = sanitize_text_field($_REQUEST['fields']['recaptcha_site_key'] ?? '');
+    $recaptcha_secret_key = sanitize_text_field($_REQUEST['fields']['recaptcha_secret_key'] ?? '');
 
     Options::update('recaptcha_site_key', $recaptcha_site_key);
     Options::update('recaptcha_secret_key', $recaptcha_secret_key);
 
-    wp_send_json(200);
+    wp_send_json(200, 200);
 }
 add_action('wp_ajax_config_survey', 'config_survey');
 

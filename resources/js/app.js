@@ -219,16 +219,20 @@
     $(document).on('submit', '#form-config-survey', function(e) {
         e.preventDefault();
 
-        let data = new FormData($(this)[0]);
-        data.append("action", "config_survey");
-        data.append("nonce", obj.ajax_nonce);
+        let site_key = $(this).children().find('#recaptcha_site_key').val()
+        let secret_key = $(this).children().find('#recaptcha_secret_key').val()
 
         $.ajax({
             url: obj.ajaxurl,
             type: 'POST',
-            contentType: false,
-            processData: false,
-            data: data,
+            data: {
+                fields: {
+                    recaptcha_site_key: site_key,
+                    recaptcha_secret_key: secret_key
+                },
+                nonce: obj.ajax_nonce,
+                action: "config_survey"
+            },
             beforeSend: () => {
                 Swal.fire({
                     title: 'Salvando as Configurações',

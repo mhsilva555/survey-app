@@ -46,7 +46,7 @@ class AssetsServiceProvider
         wp_enqueue_script('front-js', SURVEY_PLUGIN_URI . '/resources/build/js/front.min.js', ['jquery'], false, true);
 
         if ($site_key = Options::get('recaptcha_site_key')):
-            wp_enqueue_script('recaptcha', 'https://www.google.com/recaptcha/api.js?render='.$site_key, [], null, true);
+            wp_enqueue_script('recaptcha', 'https://www.google.com/recaptcha/api.js', [], null, true);
         endif;
 
         wp_localize_script('front-js', 'wp', [
