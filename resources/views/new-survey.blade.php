@@ -25,6 +25,11 @@
             </div>
         @endif
 
+        <div>
+            <button type="submit" class="button is-success save-survey mt-5">Salvar Enquete <i class="fas fa-save"></i></button>
+            <hr>
+        </div>
+
         <div class="columns">
             <div class="column">
                 @include('partials.question')

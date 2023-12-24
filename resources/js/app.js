@@ -74,8 +74,24 @@
 
             $('#foto-capa').val(attachment.url);
             $('#foto-capa-preview img').attr('src', attachment.url);
+            $('#remove-image').show();
         });
         wpMedia.open();
+    });
+
+    $(document).on('click', '#remove-image', function () {
+        $('#foto-capa').val('');
+        $('#foto-capa-preview img').attr('src', "");
+        $('#remove-image').hide();
+
+        $.ajax({
+            url: obj.ajaxurl,
+            type: 'POST',
+            data: {
+                id: $(this).data('survey'),
+                action: 'remove_image'
+            }
+        })
     });
 
 
@@ -116,8 +132,7 @@
         });
     }
 
-    let removeAnswer = function (index)
-    {
+    let removeAnswer = function (index) {
         answers.splice(index, 1)
         setAnswersID()
         loadAnswersArray()
