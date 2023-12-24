@@ -90,11 +90,11 @@
             data: {
                 survey_id: $(this).data('survey'),
                 action: 'remove_image'
-            }.done((response) => {
-                if (response === 200) {
-                    Swal.fire('Imagem Removida com Sucesso!', '', 'success');
-                }
-            })
+            }
+        }).done((response) => {
+            if (response === 200) {
+                Swal.fire('Imagem Removida com Sucesso!', '', 'success');
+            }
         })
     });
 
