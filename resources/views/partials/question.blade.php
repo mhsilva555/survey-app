@@ -22,7 +22,9 @@
 
     <div id="foto-capa-preview" class="wp-media-file-preview" style="margin-top: 15px">
         <img src="{{ $survey[0]->survey_image ?? '' }}" alt="">
+
+        <button style="display: {{ !empty($survey[0]->survey_image) ? 'block' : 'none' }}" type="button" id="remove-image" class="button is-danger is-small" data-survey="{{ $survey[0]->survey_id }}">Remover Imagem <i class="fas fa-times"></i></button>
     </div>
 </section>
 
-<button type="submit" class="button is-success save-survey mt-5">Salvar Enquete <i class="fas fa-save"></i></button>
+{{--<button type="submit" class="button is-success save-survey mt-5">Salvar Enquete <i class="fas fa-save"></i></button>--}}

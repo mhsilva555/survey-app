@@ -53,8 +53,8 @@
                     </td>
 
                     <th>
-                        <a href="{{ admin_url("admin.php?page=".DEFAULT_SURVEY_SLUG."&edit_survey=".$survey->survey_id) }}"><span class="has-text-info">Editar</span></a>
-                        <span data-id="{{ $survey->survey_id }}" class="has-text-danger ml-3 delete-survey">Deletar</span>
+                        <a href="{{ admin_url("admin.php?page=".DEFAULT_SURVEY_SLUG."&edit_survey=".$survey->survey_id) }}"><span class="has-text-info">Editar <i class="fas fa-edit"></i></span></a>
+                        <span data-id="{{ $survey->survey_id }}" class="has-text-danger ml-3 delete-survey">Deletar <i class="fas fa-trash-alt"></i></span>
                     </th>
                 </tr>
                 @endforeach

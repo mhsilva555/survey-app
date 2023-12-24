@@ -41,4 +41,13 @@ class UpdateSurvey
 
         return $votes->survey_totalvotes + 1;
     }
+
+    public static function removeImage($survey_id)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.SURVEYS;
+        $wpdb->update($table, ['survey_image' => ''], ['survey_id' => $survey_id]);
+
+        return 200;
+    }
 }

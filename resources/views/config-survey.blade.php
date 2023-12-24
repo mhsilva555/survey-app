@@ -8,21 +8,21 @@
         </ul>
     </nav>
     
-    <form method="POST" class="form form-config-survey" id="form-config-survey">
+    <form method="POST" class="form form-config-survey" id="form-config-survey" enctype="multipart/form-data">
         <h2 class="section-title">Google reCAPTCHA</h2>
 
         <div class="columns">
             <div class="column">
                <fieldset class="field">
                     <p class="section-title-small">Chave do Site</p>
-                    <input type="text" class="input" name="recaptcha_site_key" placeholder="6Le5-TkpAAAAAAx73bry-XgxBmd6qa_ifCAcOKQy" value="{{ $recaptcha_site_key ?? '' }}">
+                    <input type="text" class="input" name="recaptcha_site_key" id="recaptcha_site_key" placeholder="6Le5-TkpAAAAAAx73bry-XgxBmd6qa_ifCAcOKQy" value="{{ $recaptcha_site_key ?? '' }}">
                 </fieldset>
             </div>
 
             <div class="column">
                 <fieldset class="field">
                      <p class="section-title-small">Chave Secreta</p>
-                     <input type="text" class="input" name="recaptcha_secret_key" placeholder="6Le5-TkpAAAAANQoM1kgCHDVUmdSz8Olb52rlsQa" value="{{ $recaptcha_secret_key ?? '' }}">
+                     <input type="text" class="input" name="recaptcha_secret_key" id="recaptcha_secret_key" placeholder="6Le5-TkpAAAAANQoM1kgCHDVUmdSz8Olb52rlsQa" value="{{ $recaptcha_secret_key ?? '' }}">
                  </fieldset>
              </div>
         </div>

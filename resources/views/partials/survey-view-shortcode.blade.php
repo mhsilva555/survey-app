@@ -72,6 +72,12 @@
                         @endforeach
                     </div>
 
+                    <div class="g-recaptcha"
+                         style="margin-bottom: 15px"
+                         data-sitekey="{{ \Survey\App\Facades\Options::get('recaptcha_site_key') }}"
+                         data-callback="onReCaptchaSuccess"
+                    ></div>
+
                     <button type="submit" class="survey-button-submit disabled" disabled>Votar</button>
                     <input type="hidden" name="survey_id" id="survey_id" value="{{ $data[0]->survey_id }}">
                 </form>
