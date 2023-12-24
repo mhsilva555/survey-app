@@ -33,17 +33,17 @@ function save_survey()
 }
 add_action('wp_ajax_save_survey', 'save_survey');
 
-function delete_image() {
+function remove_image() {
     $survey_id = $_REQUEST['survey_id'] ?? null;
 
     if (!$survey_id) {
         wp_send_json(400);
     }
 
-    $delete = UpdateSurvey::deleteImage($survey_id);
+    $delete = UpdateSurvey::removeImage($survey_id);
     wp_send_json($delete);
 }
-add_action('wp_ajax_delete_image', 'delete_image');
+add_action('wp_ajax_remove_image', 'remove_image');
 
 function config_survey()
 {

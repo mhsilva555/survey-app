@@ -42,7 +42,7 @@ class UpdateSurvey
         return $votes->survey_totalvotes + 1;
     }
 
-    public static function deleteImage($survey_id)
+    public static function removeImage($survey_id)
     {
         global $wpdb;
         $table = $wpdb->prefix.SURVEYS;
